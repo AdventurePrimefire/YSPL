@@ -21,6 +21,7 @@ import info.gridworld.grid.Grid;
 import info.gridworld.grid.Location;
 import info.gridworld.gui.WorldFrame;
 
+import java.awt.event.KeyListener;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Set;
@@ -67,6 +68,20 @@ public void show() {
         frame.setVisible(true);
     } else
         frame.repaint();
+}
+
+/**
+ * Add a key listener to the frame.
+ * 
+ * @param listener
+ *            to add to the frame
+ */
+public void addKeyListener(KeyListener listener) {
+    if (frame == null) {
+        frame = new WorldFrame<T>(this);
+    }
+    this.frame.addKeyListener(listener);
+    this.frame.getContentPane().addKeyListener(listener);
 }
 
 /**

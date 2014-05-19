@@ -5,5 +5,6 @@
 	<classpathentry kind="src" path="firstProject"/>
 	<classpathentry kind="src" path="critters"/>
 	<classpathentry kind="src" path="framework"/>
+	<classpathentry kind="src" path="YouShouldProbablyLeave"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
