@@ -21,4 +21,8 @@ public boolean dispatchKeyEvent(KeyEvent e) {
 public boolean[] getKeyArray() {
     return Arrays.copyOf(keys, 255);
 }
+
+public boolean getKey(int KeyCode) {
+    return keys[KeyCode];
+}
 }
