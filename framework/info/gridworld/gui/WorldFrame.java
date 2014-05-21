@@ -67,6 +67,9 @@ import javax.swing.KeyStroke;
 import javax.swing.event.HyperlinkEvent;
 import javax.swing.event.HyperlinkListener;
 
+import main.YSPLStatics;
+import util.KeyDispatcher;
+
 import java.io.PrintWriter;
 import java.io.StringWriter;
 
@@ -257,15 +260,22 @@ public WorldFrame(World<T> world) {
     messageArea.setBackground(new Color(0xFAFAD2));
     content.add(new JScrollPane(messageArea), BorderLayout.NORTH);
     
+    // This is code that we added.
+    KeyboardFocusManager manager = KeyboardFocusManager.getCurrentKeyboardFocusManager();
+    KeyDispatcher keys = new KeyDispatcher();
+    manager.addKeyEventDispatcher(keys);
+    YSPLStatics.keys = keys;
+    // End our added code.
     pack();
     repaint(); // to show message
     display.setGrid(gr);
 }
 
-public void addKeyListener(KeyListener listener){
+public void addKeyListener(KeyListener listener) {
     super.addKeyListener(listener);
     this.display.addKeyListener(listener);
 }
+
 public void repaint() {
     String message = getWorld().getMessage();
     if (message == null)
