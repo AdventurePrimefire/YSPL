@@ -81,7 +81,6 @@ public void addKeyListener(KeyListener listener) {
         frame = new WorldFrame<T>(this);
     }
     this.frame.addKeyListener(listener);
-    this.frame.getContentPane().addKeyListener(listener);
 }
 
 /**
