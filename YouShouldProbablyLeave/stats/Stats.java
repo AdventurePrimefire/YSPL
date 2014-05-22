@@ -23,5 +23,17 @@ public interface Stats {
 	public int getAgility();// a % chance to avoid attacks
 	public void setAgility(int agi);
 	public double getAvoidPercent();//returns a double < 0 that is proportional to agility
+	
+	//Leveling 
+	public int getLevel();//the actual level
+	public void setLevel(int lev);
+	public void levelUp();//increases stats (or the basestat's increment)
+	
+	public int getNextExp();//the exp needed to increase level
+	public void setNextExp(int exp);
+	
+	public int getExp();//the exp the character has (this should be reset to 0 on level up)
+	public void setExp(int exp);
+	public void addExp(int exp);
 }
 

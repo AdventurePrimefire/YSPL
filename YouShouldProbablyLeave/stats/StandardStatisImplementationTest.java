@@ -3,9 +3,15 @@
  */
 package stats;
 
+import java.util.Arrays;
+
 import info.gridworld.actor.Actor;
 
 public class StandardStatisImplementationTest extends Actor implements Stats {
+	
+	private int level;
+	private int nextExp;
+	private int exp;
 	
 	private int maxHP;
 	private int curHP;
@@ -17,6 +23,9 @@ public class StandardStatisImplementationTest extends Actor implements Stats {
 	public StandardStatisImplementationTest() {//these will change depending on the character
 		//we could add some math.random for variance or parameters for the Player Character
 		super();
+		setLevel(1);
+		setExp(0);
+		setNextExp(100);
 		setMaxHp(100);
 		setCurrentHp(getMaxHp());
 		setStrength(20);
@@ -28,6 +37,11 @@ public class StandardStatisImplementationTest extends Actor implements Stats {
 	public void act() {
 		if (!checkLife()) {
 			removeSelfFromGrid();
+		}
+		
+		while (this.exp > this.nextExp){
+			this.exp -= this.nextExp;
+			levelUp();
 		}
 	}
 
@@ -116,6 +130,138 @@ public class StandardStatisImplementationTest extends Actor implements Stats {
 	@Override
 	public double getAvoidPercent() {
 		return (double)this.agility / 100.0;
+	}
+
+	@Override
+	public int getLevel() {
+		return this.level;
+	}
+
+	@Override
+	public void setLevel(int lev) {
+		this.level = lev;
+	}
+
+	@Override
+	public void levelUp() {
+		this.level++;
+		this.nextExp *= 1.1;
+		
+		int total = 0;
+		while (total == 0) {
+			if (Math.random() > 0.5) {
+				this.maxHP+= 3;
+				this.curHP+= 3;
+				total++;
+				if (Math.random() > 0.8) {
+					this.maxHP+= 2;
+					this.curHP+= 2;
+				}
+			}
+			//this.curHP = this.maxHP;
+		
+			if (Math.random() > 0.5) {
+				this.strength++;
+				total++;
+				if (Math.random() > 0.8) {
+					this.strength++;
+				}
+		
+			}
+		
+			if (Math.random() > 0.5) {
+				this.defense++;
+				total++;
+				if (Math.random() > 0.8) {
+					this.defense++;
+				}
+			}
+		
+			if (Math.random() > 0.8) {
+				this.agility++;
+				total++;
+			}
+		}
+	}
+	
+	public String levelUpDisplay() {//don't use this in game this is to test the basic leveling implementation with an output
+		int[] out = new int[5];
+		this.level++;
+		out[0] = (int)((this.nextExp * 1.1) - this.nextExp);
+		this.nextExp *= 1.1;
+		
+		int total = 0;
+		while (total == 0) {
+			
+			if (Math.random() > 0.5) {
+				this.maxHP+= 3;
+				this.curHP+= 3;
+				total++;
+				out[1] += 3;
+				if (Math.random() > 0.8) {
+					this.maxHP+= 2;
+					this.curHP+= 2;
+					out[1] += 2;
+				}
+			}
+			//this.curHP = this.maxHP;
+		
+			if (Math.random() > 0.5) {
+				this.strength++;
+				total++;
+				out[2]++;
+				if (Math.random() > 0.8) {
+					this.strength++;
+					out[2]++;
+				}
+		
+			}
+		
+			if (Math.random() > 0.5) {
+				this.defense++;
+				out[3]++;
+				total++;
+				if (Math.random() > 0.8) {
+					this.defense++;
+					out[3]++;
+				}
+			}
+		
+			if (Math.random() > 0.8) {
+				this.agility++;
+				total++;
+				out[4]++;
+			}
+		}
+		
+		return Arrays.toString(out);
+	}
+
+	@Override
+	public int getNextExp() {
+		return this.nextExp;
+	}
+	
+	@Override
+	public void setNextExp(int exp) {
+		this.nextExp = exp;
+	}
+
+	@Override
+	public int getExp() {
+		return this.exp;
+	}
+
+	@Override
+	public void setExp(int exp) {
+		if (exp < this.nextExp) {
+			this.exp = exp;
+		}
+	}
+
+	@Override
+	public void addExp(int exp) {
+		this.exp += exp;
 	}
 
 }
