@@ -39,7 +39,7 @@ private Grid<T> gr;
 private Set<String> occupantClassNames;
 private Set<String> gridClassNames;
 private String message;
-private JFrame frame;
+private WorldFrame<T> frame;
 
 private static Random generator = new Random();
 
@@ -81,6 +81,10 @@ public void addKeyListener(KeyListener listener) {
         frame = new WorldFrame<T>(this);
     }
     this.frame.addKeyListener(listener);
+}
+
+public WorldFrame<T> getWorldFrame() {
+    return this.frame;
 }
 
 /**

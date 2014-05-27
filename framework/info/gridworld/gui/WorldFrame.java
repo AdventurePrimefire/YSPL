@@ -67,7 +67,7 @@ import javax.swing.KeyStroke;
 import javax.swing.event.HyperlinkEvent;
 import javax.swing.event.HyperlinkListener;
 
-import main.YSPLStatics;
+import main.YSPL;
 import util.KeyDispatcher;
 
 import java.io.PrintWriter;
@@ -92,7 +92,9 @@ private Set<Class> gridClasses;
 private JMenu newGridMenu;
 
 private static int count = 0;
-
+public GUIController<T> getGUI(){
+    return this.control;
+}
 /**
  * Constructs a WorldFrame that displays the occupants of a world
  * 
@@ -263,8 +265,9 @@ public WorldFrame(World<T> world) {
     // This is code that we added.
     KeyboardFocusManager manager = KeyboardFocusManager.getCurrentKeyboardFocusManager();
     KeyDispatcher keys = new KeyDispatcher();
+    YSPL.keys = keys;
     manager.addKeyEventDispatcher(keys);
-    YSPLStatics.keys = keys;
+    YSPL.keys = keys;
     // End our added code.
     pack();
     repaint(); // to show message
