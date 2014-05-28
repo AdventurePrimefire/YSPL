@@ -10,7 +10,7 @@ import world.grid.GridMap;
 
 public class DefaultPathfinding implements Pathfinding {
     public final int MaxPathLength;
-
+    
     /**
      * Default constructor for the Pathfinding. Uses
      * Pathfinding.DefaultPathfindingSteps for MaxPathLength.
@@ -18,7 +18,7 @@ public class DefaultPathfinding implements Pathfinding {
     public DefaultPathfinding() {
         MaxPathLength = Pathfinding.DefaultPathfindingSteps;
     }
-
+    
     /**
      * @param steps
      *            in the MaxPathLength.
@@ -26,7 +26,7 @@ public class DefaultPathfinding implements Pathfinding {
     public DefaultPathfinding(int steps) {
         MaxPathLength = steps;
     }
-
+    
     @Override
     public AdvancedLocation findPath(Location start, Location end, GridMap<Actor> grid) {
         ArrayList<Space> queue = new ArrayList<Space>();
@@ -46,8 +46,8 @@ public class DefaultPathfinding implements Pathfinding {
         }
         return best.loc;
     }
-
-    void consolidate(ArrayList<Space> queue, ArrayList<Space> addingLocations) {
+    
+    protected void consolidate(ArrayList<Space> queue, ArrayList<Space> addingLocations) {
         for (Space i : addingLocations) {
             for (int j = 0; j < queue.size(); j++) {
                 Space test = queue.get(j);
@@ -62,8 +62,8 @@ public class DefaultPathfinding implements Pathfinding {
             }
         }
     }
-
-    ArrayList<Space> findNextSpace(Space current, GridMap<Actor> grid) throws Exception {
+    
+    protected ArrayList<Space> findNextSpace(Space current, GridMap<Actor> grid) throws Exception {
         if (current.counter <= this.MaxPathLength) {
             ArrayList<Space> out = new ArrayList<Space>();
             // Finding all possible locations to travel to.
@@ -96,11 +96,11 @@ public class DefaultPathfinding implements Pathfinding {
             throw new Exception();
         }
     }
-
-    class Space {
+    
+    protected class Space {
         public AdvancedLocation loc;
         public int counter;
-
+        
         public Space(AdvancedLocation loc, int counter) {
             this.loc = loc;
             this.counter = counter;
