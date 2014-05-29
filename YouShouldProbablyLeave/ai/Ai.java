@@ -1,7 +1,6 @@
 package ai;
 
 import java.util.ArrayList;
-
 import info.gridworld.actor.Actor;
 import info.gridworld.grid.Location;
 import player.PlayerActor;
@@ -95,6 +94,21 @@ public abstract class Ai extends Actor implements Stats {
 		
 		levelUp();
 	}
+	
+	public Actor getTarget() {
+		return this.target;
+	}
+	
+	public void setTarget(Actor target) {
+		this.target = target;
+	}
+	
+	public void resetTarget() {
+		this.target = null;
+	}
+	
+	public abstract Location findPath();
+	
 	//my by hand pathfinding script, do not use
 	/*public ArrayList<Location> findPath(int i, Location l, ArrayList<Location> path) {
 		if (!(getGrid().isValid(l)) || getGrid().get(l) != null || i > this.searchRange * 1.5) {
@@ -208,7 +222,7 @@ public abstract class Ai extends Actor implements Stats {
 					//attack
 				} else {
 					//find path, move to it;
-					//this.moveTo(findPath(this.getLocation()));
+					this.moveTo(findPath());
 				}
 			}
 		} else {
@@ -316,6 +330,7 @@ public abstract class Ai extends Actor implements Stats {
 	@Override
 	public void levelUp() {
 		setMaxHp((int)(this.baseHP * (1 + (level / 50.0))));
+		setCurrentHp(getMaxHp());
 		setStrength((int)(this.baseStr * (1 + (level / 50.0))));
 		setDefense((int)(this.baseDef * (1 + (level / 50.0))));
 		setAgility((int)(this.baseAgi * (1 + (level / 50.0))));

@@ -1,6 +1,7 @@
 package ai.pathfinding;
 
 import info.gridworld.actor.Actor;
+import info.gridworld.grid.Grid;
 import info.gridworld.grid.Location;
 import world.grid.AdvancedLocation;
 import world.grid.GridMap;
@@ -17,5 +18,5 @@ public interface Pathfinding {
      *            that the Locations are in.
      * @return the Location that it should move to.
      */
-    public AdvancedLocation findPath(Location start, Location end, GridMap<Actor> grid);
+    public AdvancedLocation findPath(Location start, Location end, Grid<Actor> grid);
 }

@@ -1,6 +1,7 @@
 package ai.pathfinding;
 
 import info.gridworld.actor.Actor;
+import info.gridworld.grid.Grid;
 import info.gridworld.grid.Location;
 
 import java.util.ArrayList;
@@ -28,7 +29,7 @@ public class DefaultPathfinding implements Pathfinding {
     }
     
     @Override
-    public AdvancedLocation findPath(Location start, Location end, GridMap<Actor> grid) {
+    public AdvancedLocation findPath(Location start, Location end, Grid<Actor> grid) {
         ArrayList<Space> queue = new ArrayList<Space>();
         queue.add(new Space(new AdvancedLocation(end), 0));
         for (int i = 0; i < queue.size(); i++) {
@@ -58,12 +59,14 @@ public class DefaultPathfinding implements Pathfinding {
                         queue.remove(j);
                         queue.add(i);
                     }
+                } else {
+                	queue.add(i);
                 }
             }
         }
     }
     
-    protected ArrayList<Space> findNextSpace(Space current, GridMap<Actor> grid) throws Exception {
+    protected ArrayList<Space> findNextSpace(Space current, Grid<Actor> grid) throws Exception {
         if (current.counter <= this.MaxPathLength) {
             ArrayList<Space> out = new ArrayList<Space>();
             // Finding all possible locations to travel to.
