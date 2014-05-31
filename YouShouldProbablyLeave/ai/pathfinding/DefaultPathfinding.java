@@ -29,36 +29,39 @@ public class DefaultPathfinding implements Pathfinding {
     
     @Override
     public AdvancedLocation findPath(Location start, Location end, Grid<Actor> grid) {
-        
-        ArrayList<Space> queue = new ArrayList<Space>();
-        queue.add(new Space(new AdvancedLocation(end), 0));
+        ArrayList<Space> queue = new ArrayList<Space>();// The list of locations
+// that have been found
+        queue.add(new Space(new AdvancedLocation(end), 0));// Starting at the
+// end and finding the start
         for (int i = 0; i < queue.size(); i++) {
             try {
-                ArrayList<Space> adding = findNextSpace(queue.get(i), grid);
+                ArrayList<Space> adding = findNextSpace(queue.get(i), grid);// Finds
+// all of the valid spaces adjacent to the current one
                 boolean found = false;
-                for (Space l : adding) {
+                for (Space l : adding) {// Check new spaces to see if one is the
+// end space
                     if (l.loc.getRow() == start.getRow() && l.loc.getCol() == start.getCol()) {
                         found = true;
                     }
                 }
-                consolidate(queue, adding);
+                consolidate(queue, adding);// Properly merges the queue with the
+// new spaces
                 if (found == true) {
-                    break;
+                    break;// Start found and path-finding stops
                 }
             } catch (Exception e) {}
         }
         Space best = null;
         for (Space i : queue) {
             if (i.loc.isAdjacent(start)) {
-                System.out.print(i.toString() + " ");
                 if (best == null) {
                     best = i;
-                } else if (best.counter > i.counter) {
+                } else if (best.counter > i.counter) {// If the currents space
+// is closer to the end then the other spaces
                     best = i;
                 }
             }
         }
-        System.out.println("");
         return best.loc;
     }
     
@@ -68,8 +71,9 @@ public class DefaultPathfinding implements Pathfinding {
             boolean addI = true;
             for (int j = 0; j < queue.size(); j++) {
                 test = queue.get(j);
-                if (test.loc.getRow() == i.loc.getRow() && test.loc.getCol() == i.loc.getCol()) {
-                    if (test.counter > i.counter) {
+                if (test.loc.getRow() == i.loc.getRow() && test.loc.getCol() == i.loc.getCol()) {// Sees
+// if they are in the same spot
+                    if (test.counter > i.counter) {// What one is closer
                         addI = false;
                         break;
                     } else {
@@ -78,7 +82,7 @@ public class DefaultPathfinding implements Pathfinding {
                     }
                 }
             }
-            if (addI == true) {
+            if (addI == true) {// If i is the best location
                 queue.add(i);
             }
         }
@@ -119,7 +123,7 @@ public class DefaultPathfinding implements Pathfinding {
         }
     }
     
-    protected class Space {
+    protected class Space {// Space object used in the path-finding
         public AdvancedLocation loc;
         public int counter;
         
