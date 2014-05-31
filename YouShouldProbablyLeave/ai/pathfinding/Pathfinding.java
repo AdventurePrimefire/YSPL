@@ -4,12 +4,13 @@ import info.gridworld.actor.Actor;
 import info.gridworld.grid.Grid;
 import info.gridworld.grid.Location;
 import world.grid.AdvancedLocation;
-import world.grid.GridMap;
 
 public interface Pathfinding {
     public static final int DefaultPathfindingSteps = 16;
 
     /**
+     * Finds the location to move to given the start and end points.
+     *
      * @param start
      *            Location of starting position.
      * @param end
