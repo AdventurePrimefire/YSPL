@@ -306,4 +306,12 @@ public abstract class Ai extends Actor implements CompleatStats {
     @Override
     public void addExp(int exp) {}
     
+    public void setSearchRange(int range) {
+    	this.searchRange = range;
+    }
+    
+    public int getSearchRange() {
+    	return this.searchRange;
+    }
+    
 }
