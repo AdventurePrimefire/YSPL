@@ -1,5 +1,7 @@
 package entities;
 
+import java.awt.Color;
+
 import info.gridworld.actor.Actor;
 import info.gridworld.grid.Location;
 import ai.Ai;
@@ -19,22 +21,26 @@ public class Rat extends Ai {
 		super(1, BASE_HP, BASE_ATT, BASE_DEF, BASE_AGI);
 		this.setSearchRange(BASE_SEARCH_RANGE);
 		this.pathfind = new DefaultPathfinding(BASE_SEARCH_RANGE);
+		this.setColor(Color.BLACK);
 	}
 	
 	public Rat(int level) {
 		super(level, BASE_HP, BASE_ATT, BASE_DEF, BASE_AGI);
 		this.setSearchRange(BASE_SEARCH_RANGE);
 		this.pathfind = new DefaultPathfinding(BASE_SEARCH_RANGE);
+		this.setColor(Color.BLACK);
 	}
 	
 	public Rat(Actor target) {
 		super(1, BASE_HP, BASE_ATT, BASE_DEF, BASE_AGI, target, BASE_SEARCH_RANGE);
 		this.pathfind = new DefaultPathfinding(BASE_SEARCH_RANGE);
+		this.setColor(Color.BLACK);
 	}
 	
 	public Rat(int level, Actor target) {
 		super(level, BASE_HP, BASE_ATT, BASE_DEF, BASE_AGI, target, BASE_SEARCH_RANGE);
 		this.pathfind = new DefaultPathfinding(BASE_SEARCH_RANGE);
+		this.setColor(Color.BLACK);
 	}
 
 	@Override
