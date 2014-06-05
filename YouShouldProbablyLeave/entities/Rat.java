@@ -16,29 +16,31 @@ public class Rat extends Ai {
 	private static final int BASE_DEF = 2;
 	private static final int BASE_AGI = 20;
 	private static final int BASE_SEARCH_RANGE = 4;
+	private static final int EXP_VALUE = 10;
+
 	
 	public Rat() {
-		super(1, BASE_HP, BASE_ATT, BASE_DEF, BASE_AGI);
+		super(1, BASE_HP, BASE_ATT, BASE_DEF, BASE_AGI, EXP_VALUE);
 		this.setSearchRange(BASE_SEARCH_RANGE);
 		this.pathfind = new DefaultPathfinding(BASE_SEARCH_RANGE);
 		this.setColor(Color.BLACK);
 	}
 	
 	public Rat(int level) {
-		super(level, BASE_HP, BASE_ATT, BASE_DEF, BASE_AGI);
+		super(level, BASE_HP, BASE_ATT, BASE_DEF, BASE_AGI, EXP_VALUE);
 		this.setSearchRange(BASE_SEARCH_RANGE);
 		this.pathfind = new DefaultPathfinding(BASE_SEARCH_RANGE);
 		this.setColor(Color.BLACK);
 	}
 	
 	public Rat(Actor target) {
-		super(1, BASE_HP, BASE_ATT, BASE_DEF, BASE_AGI, target, BASE_SEARCH_RANGE);
+		super(1, BASE_HP, BASE_ATT, BASE_DEF, BASE_AGI, EXP_VALUE, target, BASE_SEARCH_RANGE);
 		this.pathfind = new DefaultPathfinding(BASE_SEARCH_RANGE);
 		this.setColor(Color.BLACK);
 	}
 	
 	public Rat(int level, Actor target) {
-		super(level, BASE_HP, BASE_ATT, BASE_DEF, BASE_AGI, target, BASE_SEARCH_RANGE);
+		super(level, BASE_HP, BASE_ATT, BASE_DEF, BASE_AGI, EXP_VALUE, target, BASE_SEARCH_RANGE);
 		this.pathfind = new DefaultPathfinding(BASE_SEARCH_RANGE);
 		this.setColor(Color.BLACK);
 	}

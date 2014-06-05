@@ -62,7 +62,11 @@ public class DefaultPathfinding implements Pathfinding {
                 }
             }
         }
-        return best.loc;
+        if (best == null) {
+        	return null;
+        } else {
+            return best.loc;	
+        }
     }
     
     protected void consolidate(ArrayList<Space> queue, ArrayList<Space> addingLocations) {

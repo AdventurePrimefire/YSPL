@@ -24,6 +24,8 @@ public abstract class Ai extends Actor implements CompleatStats {
     private int defense;
     private int agility;
     
+    private final int xpValue;
+    
     private Actor target;
     private boolean hasFoundTarget;
     private int searchRange;
@@ -42,6 +44,8 @@ public abstract class Ai extends Actor implements CompleatStats {
         
         this.hasFoundTarget = false;
         this.searchRange = 20;
+        
+        this.xpValue = 10;
         
         levelUp();
     }
@@ -64,10 +68,12 @@ public abstract class Ai extends Actor implements CompleatStats {
         this.target = target;
         this.searchRange = searchRange;
         
+        this.xpValue = 10;
+        
         levelUp();
     }
     
-    public Ai(int level, int baseHp, int baseStr, int baseDef, int baseAgi, Actor target, int searchRange) {// use
+    public Ai(int level, int baseHp, int baseStr, int baseDef, int baseAgi, int xpValue, Actor target, int searchRange) {// use
 // this to change the stats of other AIs
         super();
         setLevel(level);
@@ -82,10 +88,12 @@ public abstract class Ai extends Actor implements CompleatStats {
         this.hasFoundTarget = false;
         this.searchRange = searchRange;
         
+        this.xpValue = xpValue;
+        
         levelUp();
     }
     
-    public Ai(int level, int baseHp, int baseStr, int baseDef, int baseAgi) {// if
+    public Ai(int level, int baseHp, int baseStr, int baseDef, int baseAgi, int xpValue) {// if
 // the actor has no target it will find one the same way a critter would
         super();
         setLevel(level);
@@ -98,6 +106,8 @@ public abstract class Ai extends Actor implements CompleatStats {
         
         this.hasFoundTarget = false;
         this.searchRange = 2;
+        
+        this.xpValue = xpValue;
         
         levelUp();
     }
@@ -156,16 +166,23 @@ public abstract class Ai extends Actor implements CompleatStats {
     @Override
     public void act() {
         if (!checkLife()) {
+        	if (this.target != null  && target instanceof CompleatStats) {
+        		((CompleatStats)target).addExp(this.xpValue * level);
+        	}
             removeSelfFromGrid();
         }
         if (this.target != null) {
             if (search()) {
                 if (getDistanceToTarget() == 1) {
                     // attack
+                	if (target instanceof CompleatStats) {
+                		((CompleatStats)target).takeDamage(this.getStrength());
+                	}
                 } else {
                     // find path, move to it;
                 	Location next = findPath();
-                	if (getGrid().get(next) == null) {
+                	System.out.println(this.toString() + " will move to " + next);
+                	if ( next != null && getGrid().get(next) == null) {
                 		this.moveTo(next);
                 	}
                 }
