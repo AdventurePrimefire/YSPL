@@ -8,14 +8,8 @@ import display.PathedImage;
 
 public class StoneFloor extends Actor implements PathedImage {
     public static final File file = new File("resource//image//world//StoneFloor.gif");
-
+    
     public StoneFloor() {
         super();
     }
-
-    @Override
-    public File getFile() {
-        return this.file;
-    }
-
 }

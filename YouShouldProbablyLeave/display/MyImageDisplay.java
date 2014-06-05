@@ -13,9 +13,11 @@ import java.lang.reflect.Field;
 import javax.imageio.ImageIO;
 
 public class MyImageDisplay extends ImageDisplay {
-    private Class cl;
-    private File file;
-    private BufferedImage image;
+    Class cl;
+    File file;
+    BufferedImage image;
+    boolean isConnected;
+    ConectedImageDisplay conectedTexture;
 
     public MyImageDisplay(Class cl) throws Exception {
         super();
@@ -24,6 +26,12 @@ public class MyImageDisplay extends ImageDisplay {
             Field field = cl.getField("file");
             this.file = (File) field.get(null);
             this.image = ImageIO.read(this.file);
+// if (ConectedTexture.class.isAssignableFrom(cl)) {
+// this.isConnected = true;
+// this.conectedTexture = new ConectedImageDisplay(this);
+// } else {
+            this.isConnected = false;
+// }
         }
     }
 
@@ -40,14 +48,19 @@ public class MyImageDisplay extends ImageDisplay {
      */
     @Override
     public void draw(Object obj, Component comp, Graphics2D g2) {
-        Image tinted = this.image;
-        int width = tinted.getWidth(null);
-        int height = tinted.getHeight(null);
+        Image finalImage;
+        if (isConnected) {
+            finalImage = this.conectedTexture.connectedImage((ConectedTexture) obj);
+        } else {
+            finalImage = this.image;
+        }
+        int width = finalImage.getWidth(null);
+        int height = finalImage.getHeight(null);
         int size = Math.max(width, height);
 
         // Scale to shrink or enlarge the image to fit the size 1x1 cell.
         g2.scale(1.0 / size, 1.0 / size);
         g2.clip(new Rectangle(-width / 2, -height / 2, width, height));
-        g2.drawImage(tinted, -width / 2, -height / 2, null);
+        g2.drawImage(finalImage, -width / 2, -height / 2, null);
     }
 }
