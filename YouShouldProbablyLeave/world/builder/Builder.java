@@ -6,6 +6,7 @@ import info.gridworld.grid.Location;
 import java.io.*;
 import java.util.Scanner;
 
+import main.YSPL;
 import player.PlayerActor;
 import world.grid.GridMap;
 import entities.*;
@@ -33,6 +34,7 @@ public class Builder {
 			
 			if (next.equals("Pl")) {
 				world.add(new Location(posY, posX), player);
+				YSPL.player = player;
 			} else if (next.equals("Wa")) {
 				world.add(new Location(posY, posX), new Wall()); 
 			} else if (next.equals("Go")) {

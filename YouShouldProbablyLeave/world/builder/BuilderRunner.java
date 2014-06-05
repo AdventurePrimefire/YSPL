@@ -4,6 +4,7 @@ import info.gridworld.actor.ActorWorld;
 
 import java.io.*;
 
+import main.YSPL;
 import player.PlayerActor;
 
 public class BuilderRunner {
@@ -14,6 +15,9 @@ public class BuilderRunner {
 		ActorWorld world; // = new ActorWorld(new GridMap<Actor>(y, x));
 		
 		world = Builder.buildFromFile("C:/Users/vicin_000/git/yspl/YouShouldProbablyLeave/world/builder/board2.txt", player);
+		
+		YSPL.world = world;
+		YSPL.player = player;
 		
 		world.show();
 	}

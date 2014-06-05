@@ -129,11 +129,8 @@ public abstract class Ai extends Actor implements CompleatStats {
     public boolean search() {// compares the it's location to the location of
 // it's target to find the target
         // returns true if the target is near enough to be "found"
-        int distance = Math.abs(this.getLocation().getCol() - target.getLocation().getCol());
-        distance += Math.abs(this.getLocation().getRow() - target.getLocation().getRow());
-        
         if (this.hasFoundTarget) {
-            if (distance <= this.searchRange * 1.5) {// increased search range
+            if (getDistanceToTarget() <= this.searchRange * 1.5) {// increased search range
 // when the target has been found to represent "awareness"
                 return true;
             } else {
@@ -141,13 +138,19 @@ public abstract class Ai extends Actor implements CompleatStats {
                 return false;
             }
         } else {
-            if (distance <= this.searchRange) {
+            if (getDistanceToTarget() <= this.searchRange) {
                 this.hasFoundTarget = true;
                 return true;
             } else {
                 return false;
             }
         }
+    }
+    
+    public int getDistanceToTarget() {
+    	int distance = Math.abs(this.getLocation().getCol() - target.getLocation().getCol());
+        distance += Math.abs(this.getLocation().getRow() - target.getLocation().getRow());
+        return distance;
     }
     
     @Override
@@ -157,27 +160,18 @@ public abstract class Ai extends Actor implements CompleatStats {
         }
         if (this.target != null) {
             if (search()) {
-                int distance = Math.abs(this.getLocation().getCol() - target.getLocation().getCol());
-                distance += Math.abs(this.getLocation().getRow() - target.getLocation().getRow());
-                if (distance == 1) {
+                if (getDistanceToTarget() == 1) {
                     // attack
                 } else {
                     // find path, move to it;
-                    this.moveTo(findPath());
+                	Location next = findPath();
+                	if (getGrid().get(next) == null) {
+                		this.moveTo(next);
+                	}
                 }
             }
         } else {
             findTarget();
-            if (search()) {
-                int distance = Math.abs(this.getLocation().getCol() - target.getLocation().getCol());
-                distance += Math.abs(this.getLocation().getRow() - target.getLocation().getRow());
-                if (distance == 1) {
-                    // attack
-                } else {
-                    // find path, move to it;
-                    this.moveTo(findPath());
-                }
-            }
         }
     }
     
