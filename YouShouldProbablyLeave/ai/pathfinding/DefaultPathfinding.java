@@ -62,7 +62,11 @@ public class DefaultPathfinding implements Pathfinding {
                 }
             }
         }
-        return best.loc;
+        if (best == null) {
+            return null;
+        } else {
+            return best.loc;
+        }
     }
     
     protected void consolidate(ArrayList<Space> queue, ArrayList<Space> addingLocations) {
@@ -95,25 +99,25 @@ public class DefaultPathfinding implements Pathfinding {
             // Finding all possible locations to travel to.
             if (grid.isValid(current.loc.getAdjacentLocation(Location.NORTH))) {
                 AdvancedLocation aloc = new AdvancedLocation(current.loc.getAdjacentLocation(Location.NORTH));
-                if (grid.isValid(aloc)) {
+                if (grid.isMoveable(aloc)) {
                     out.add(new Space(aloc, counter));
                 }
             }
             if (grid.isValid(current.loc.getAdjacentLocation(Location.EAST))) {
                 AdvancedLocation aloc = new AdvancedLocation(current.loc.getAdjacentLocation(Location.EAST));
-                if (grid.isValid(aloc)) {
+                if (grid.isMoveable(aloc)) {
                     out.add(new Space(aloc, counter));
                 }
             }
             if (grid.isValid(current.loc.getAdjacentLocation(Location.SOUTH))) {
                 AdvancedLocation aloc = new AdvancedLocation(current.loc.getAdjacentLocation(Location.SOUTH));
-                if (grid.isValid(aloc)) {
+                if (grid.isMoveable(aloc)) {
                     out.add(new Space(aloc, counter));
                 }
             }
             if (grid.isValid(current.loc.getAdjacentLocation(Location.WEST))) {
                 AdvancedLocation aloc = new AdvancedLocation(current.loc.getAdjacentLocation(Location.WEST));
-                if (grid.isValid(aloc)) {
+                if (grid.isMoveable(aloc)) {
                     out.add(new Space(aloc, counter));
                 }
             }

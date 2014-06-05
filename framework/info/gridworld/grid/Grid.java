@@ -27,20 +27,22 @@ import java.util.ArrayList;
  * This interface is testable on the AP CS A and AB exams.
  */
 public interface Grid<E> {
+    public boolean isMoveable(Location loc);
+    
     /**
      * Returns the number of rows in this grid.
      *
      * @return the number of rows, or -1 if this grid is unbounded
      */
     int getNumRows();
-
+    
     /**
      * Returns the number of columns in this grid.
      *
      * @return the number of columns, or -1 if this grid is unbounded
      */
     int getNumCols();
-
+    
     /**
      * Checks whether a location is valid in this grid. <br />
      * Precondition: <code>loc</code> is not <code>null</code>
@@ -51,7 +53,7 @@ public interface Grid<E> {
      *         <code>false</code> otherwise
      */
     boolean isValid(Location loc);
-
+    
     /**
      * Puts an object at a given location in this grid. <br />
      * Precondition: (1) <code>loc</code> is valid in this grid (2)
@@ -65,7 +67,7 @@ public interface Grid<E> {
      *         if the location was previously unoccupied)
      */
     E put(Location loc, E obj);
-
+    
     /**
      * Removes the object at a given location from this grid. <br />
      * Precondition: <code>loc</code> is valid in this grid
@@ -76,7 +78,7 @@ public interface Grid<E> {
      *  is unoccupied)
      */
     E remove(Location loc);
-
+    
     /**
      * Returns the object at a given location in this grid. <br />
      * Precondition: <code>loc</code> is valid in this grid
@@ -87,14 +89,14 @@ public interface Grid<E> {
      *  if the location is unoccupied)
      */
     E get(Location loc);
-
+    
     /**
      * Gets the locations in this grid that contain objects.
      *
      * @return an array list of all occupied locations in this grid
      */
     ArrayList<Location> getOccupiedLocations();
-
+    
     /**
      * Gets the valid locations adjacent to a given location in all eight
      * compass directions (north, northeast, east, southeast, south, southwest,
@@ -107,7 +109,7 @@ public interface Grid<E> {
      *         in this grid
      */
     ArrayList<Location> getValidAdjacentLocations(Location loc);
-
+    
     /**
      * Gets the valid empty locations adjacent to a given location in all eight
      * compass directions (north, northeast, east, southeast, south, southwest,
@@ -120,7 +122,7 @@ public interface Grid<E> {
      *         <code>loc</code> in this grid
      */
     ArrayList<Location> getEmptyAdjacentLocations(Location loc);
-
+    
     /**
      * Gets the valid occupied locations adjacent to a given location in all
      * eight compass directions (north, northeast, east, southeast, south,
@@ -133,7 +135,7 @@ public interface Grid<E> {
      *         <code>loc</code> in this grid
      */
     ArrayList<Location> getOccupiedAdjacentLocations(Location loc);
-
+    
     /**
      * Gets the neighboring occupants in all eight compass directions (north,
      * northeast, east, southeast, south, southwest, west, and northwest). <br />
