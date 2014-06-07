@@ -26,12 +26,12 @@ public class MyImageDisplay extends ImageDisplay {
             Field field = cl.getField("file");
             this.file = (File) field.get(null);
             this.image = ImageIO.read(this.file);
-// if (ConectedTexture.class.isAssignableFrom(cl)) {
-// this.isConnected = true;
-// this.conectedTexture = new ConectedImageDisplay(this);
-// } else {
-            this.isConnected = false;
-// }
+            if (ConectedTexture.class.isAssignableFrom(cl)) {
+                this.isConnected = true;
+                this.conectedTexture = new ConectedImageDisplay(this);
+            } else {
+                this.isConnected = false;
+            }
         }
     }
 

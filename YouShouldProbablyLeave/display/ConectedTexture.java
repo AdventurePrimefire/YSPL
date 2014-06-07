@@ -14,6 +14,6 @@ public interface ConectedTexture {
     public default int getCols() {
         return 3;
     }
-
+    
     public void getConnectedImage(ConnectedImage image);
 }
