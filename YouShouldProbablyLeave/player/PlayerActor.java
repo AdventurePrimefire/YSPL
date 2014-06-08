@@ -2,6 +2,7 @@ package player;
 
 import java.awt.event.KeyEvent;
 
+import ai.Ai;
 import stats.CompleatStats;
 import main.YSPL;
 import info.gridworld.actor.Actor;
@@ -29,15 +30,27 @@ public PlayerActor() {
     this.maxHP = 100;
     this.curHP = 100;
     
-    this.strength = 10;
-    this.defense = 5;
+    this.strength = 20;
+    this.defense = 10;
     this.agility = 5;
     
     this.nextExp = 50;
     this.exp = 0;
 }
 
-public void act() {}
+public void act() {
+	if (!checkLife()) {
+		System.err.println("Player has died");
+		removeSelfFromGrid();
+		return;
+	} else {
+		while (exp >= nextExp) {
+			System.out.println("player level up");
+			exp -= nextExp;
+			levelUp();
+		}
+	}
+}
 
 public void newInput() {
     if (!running) {
@@ -60,32 +73,75 @@ private boolean moveInput() {
     // document
     if (YSPL.keys.keys[KeyEvent.VK_D] == true) {
         Location loc = new Location(super.getLocation().getRow(), super.getLocation().getCol() + 1);
-        if (super.getGrid().isValid(loc)) {
-            moveTo(loc);
-            return true;
+        Actor tar = getGrid().get(loc);
+        if (tar != null) {
+        	if (tar instanceof Ai) {
+        		System.out.println("the player attacks...");
+        		System.out.println("Target: " + tar);
+        		((Ai) tar).takeDamage(this.strength);
+        	}
+        } else {
+        	if (super.getGrid().isValid(loc)) {
+        		moveTo(loc);
+        	}
         }
+        return true;
     }
     if (YSPL.keys.keys[KeyEvent.VK_A] == true) {
         Location loc = new Location(super.getLocation().getRow(), super.getLocation().getCol() - 1);
-        if (super.getGrid().isValid(loc)) {
-            moveTo(loc);
-            return true;
+        Actor tar = getGrid().get(loc);
+        if (tar != null) {
+        	if (tar instanceof Ai) {
+        		System.out.println("the player attacks...");
+        		System.out.println("Target: " + tar);
+        		((Ai) tar).takeDamage(this.strength);
+        	}
+        } else {
+        	if (super.getGrid().isValid(loc)) {
+        		moveTo(loc);
+        	}
         }
+		return true;
     }
     if (YSPL.keys.keys[KeyEvent.VK_W] == true) {
         Location loc = new Location(super.getLocation().getRow() - 1, super.getLocation().getCol());
-        if (super.getGrid().isValid(loc)) {
-            moveTo(loc);
-            return true;
+        Actor tar = getGrid().get(loc);
+        if (tar != null) {
+        	if (tar instanceof Ai) {
+        		System.out.println("the player attacks...");
+        		System.out.println("Target: " + tar);
+        		((Ai) tar).takeDamage(this.strength);
+        	}
+        } else {
+        	if (super.getGrid().isValid(loc)) {
+        		moveTo(loc);
+        	}
         }
+		return true;
     }
     if (YSPL.keys.keys[KeyEvent.VK_S] == true) {
         Location loc = new Location(super.getLocation().getRow() + 1, super.getLocation().getCol());
-        if (super.getGrid().isValid(loc)) {
-            moveTo(loc);
-            return true;
+        Actor tar = getGrid().get(loc);
+        if (tar != null) {
+        	if (tar instanceof Ai) {
+        		System.out.println("the player attacks...");
+        		System.out.println("Target: " + tar);
+        		((Ai) tar).takeDamage(this.strength);
+        	}
+        } else {
+        	if (super.getGrid().isValid(loc)) {
+        		moveTo(loc);
+        	}
         }
+		return true;
     }
+    
+    if (YSPL.keys.keys[KeyEvent.VK_C] == true) {
+    	//do nothing
+    	System.out.println("the player does nothing");
+    	return true;
+    }
+    
     return false;
 }
 
@@ -162,41 +218,94 @@ public void setLevel(int lev) {
 @Override
 public void levelUp() {
 	this.level++;
+	this.nextExp += 5 * level;
 	
-	if (Math.random() > .2) {
-		this.maxHP += 5;
+	boolean points = false;
+	
+	while (!points) {
+	
+		if (Math.random() > .2) {
+			points = true;
+			this.maxHP += 5;
+		}
+		this.curHP = this.maxHP;
+	
+		if (Math.random() > .2) {
+			points = true;
+			this.strength++;
+			if (Math.random() > .5) {
+				this.strength += 2;
+			}
+		}
+		
+		if (Math.random() > .2) {
+			points = true;
+			this.defense++;
+			if (Math.random() > .5) {
+				this.defense += 2;
+			}
+		}
+		
+		if (Math.random() > .2) {
+			points = true;
+			this.agility++;
+		}
+	
 	}
-	this.curHP = this.maxHP;
 	
 }
 
 @Override
 public int getNextExp() {
-	// TODO Auto-generated method stub
-	return 0;
+	return this.nextExp;
 }
 
 @Override
 public void setNextExp(int exp) {
-	// TODO Auto-generated method stub
+	this.nextExp = exp;
 	
 }
 
 @Override
 public int getExp() {
-	// TODO Auto-generated method stub
-	return 0;
+	return this.exp;
 }
 
 @Override
 public void setExp(int exp) {
-	// TODO Auto-generated method stub
+	this.exp = exp;
 	
 }
 
 @Override
 public void addExp(int exp) {
-	// TODO Auto-generated method stub
+	this.exp += exp;
 	
+}
+
+public double getAvoidPercent() {
+	return getAgility() / 100.0;
+}
+
+public void takeDamage(int damage) {
+if (Math.random() > getAvoidPercent()) {
+	if (damage > defense) {
+		this.curHP -= (damage - defense);
+		System.out.println("the player takes: " + (damage - defense) + " dammage");
+	} else {
+		this.curHP--;
+		System.out.println("the player takes: 1 dammage");
+	}
+} else {
+	System.out.println("the player avoids attack");
+}
+}
+
+public boolean checkLife() {
+	if (curHP <= 0) {
+		return false;
+	} else {
+		return true;
+	}
 }
 }

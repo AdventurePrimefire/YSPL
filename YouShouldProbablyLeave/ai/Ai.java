@@ -167,9 +167,11 @@ public abstract class Ai extends Actor implements CompleatStats {
     public void act() {
         if (!checkLife()) {
         	if (this.target != null  && target instanceof CompleatStats) {
+        		System.out.println(this.target + " has gained " + (this.xpValue * level) + " exp");
         		((CompleatStats)target).addExp(this.xpValue * level);
         	}
             removeSelfFromGrid();
+            return;
         }
         if (this.target != null) {
             if (search()) {
@@ -224,7 +226,13 @@ public abstract class Ai extends Actor implements CompleatStats {
     @Override
     public void takeDamage(int damage) {
         if (Math.random() > getAvoidPercent()) {
-            this.curHP -= damage - defense;
+        	if (damage <= defense) {
+        		System.out.println("Damage Taken: " + (damage - defense));
+        		this.curHP -= damage - defense;
+        	} else {
+        		System.out.println("Damage Taken: 1");
+        		this.curHP--;
+        	}
         }
     }
     

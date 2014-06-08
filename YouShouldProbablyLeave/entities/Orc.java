@@ -12,7 +12,7 @@ public class Orc extends Ai {
 	private Pathfinding pathfind;
 	
 	private static final int BASE_HP = 30;
-	private static final int BASE_ATT = 8;
+	private static final int BASE_ATT = 16;
 	private static final int BASE_DEF = 5;
 	private static final int BASE_AGI = 3;
 	private static final int BASE_SEARCH_RANGE = 4;

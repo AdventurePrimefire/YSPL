@@ -12,7 +12,7 @@ public class Goblin extends Ai {
 	private Pathfinding pathfind;
 	
 	private static final int BASE_HP = 20;
-	private static final int BASE_ATT = 5;
+	private static final int BASE_ATT = 10;
 	private static final int BASE_DEF = 2;
 	private static final int BASE_AGI = 5;
 	private static final int BASE_SEARCH_RANGE = 4;
