@@ -1,0 +1,12 @@
+15 10
+
+Wa 0 Wa 0 Wa 0 Wa 0 Wa 0 Wa 0 Wa 0 Wa 0 Wa 0 Wa 0 Wa 0 Wa 0 Wa 0 Wa 0 Wa 0
+Wa 0 00 0 00 0 00 0 Wa 0 00 0 00 0 00 0 00 0 00 0 Wa 0 00 0 00 0 00 0 Wa 0
+Wa 0 00 0 Go 1 00 0 Wa 0 00 0 Go 1 00 0 Go 1 00 0 Wa 0 00 0 Ra 1 00 0 Wa 0
+Wa 0 00 0 00 0 00 0 Wa 0 00 0 00 0 00 0 00 0 00 0 Wa 0 00 0 00 0 00 0 Wa 0
+Wa 0 Wa 0 00 0 Wa 0 Wa 0 00 0 00 0 00 0 00 0 Wa 0 Wa 0 Wa 0 00 0 Wa 0 Wa 0
+Wa 0 00 0 00 0 00 0 00 0 00 0 00 0 00 0 00 0 00 0 00 0 00 0 00 0 00 0 Wa 0
+Wa 0 Wa 0 00 0 Wa 0 Wa 0 Wa 0 Wa 0 Wa 0 00 0 Wa 0 Wa 0 Wa 0 00 0 Wa 0 Wa 0
+Wa 0 00 0 00 0 00 0 Wa 0 00 0 00 0 00 0 00 0 00 0 Wa 0 00 0 Pl 0 00 0 Wa 0
+Wa 0 00 0 Or 3 00 0 Wa 0 00 0 Ra 1 00 0 Ra 1 00 0 Wa 0 00 0 00 0 00 0 Wa 0
+Wa 0 Wa 0 Wa 0 Wa 0 Wa 0 Wa 0 Wa 0 Wa 0 Wa 0 Wa 0 Wa 0 Wa 0 Wa 0 Wa 0 Wa 0
