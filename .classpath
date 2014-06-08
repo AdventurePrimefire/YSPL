@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="src" path="boxBug"/>
-	<classpathentry kind="src" path="firstProject"/>
 	<classpathentry kind="src" path="framework"/>
 	<classpathentry kind="src" path="YouShouldProbablyLeave"/>
 	<classpathentry kind="output" path="bin"/>
