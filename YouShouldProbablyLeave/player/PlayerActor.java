@@ -23,6 +23,13 @@ private int agility;
 private int nextExp;
 private int exp;
 
+// the stats are set in the constructor,
+//the act method checks for level ups and makes sure the player is still alive
+//i've added a return statement to prevent the game crashing on death but the game will still crash if there are two entities attacking the player
+//if the player presses C the player actor will skip their turn
+//Pressing the WASD keys will still move but no longer through walls and if there is an enemy in the way the player will attack it 
+
+
 public PlayerActor() {
     super();
     this.level = 1;

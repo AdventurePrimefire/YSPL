@@ -13,6 +13,44 @@ import entities.*;
 
 public class Builder {
 	
+	//the builder reads files in the following format:
+	//(an int the height of the board) (an int the width of the world)
+	//
+	// (the tile key) (tile level) (key) (level) (key) (level) ect...
+	//the first two numbers are the size of the board
+	//the following graph shows a two letter key that determines what is in that position
+	//and then a number to denote the level of the enemy, if the key represents something like a wall
+	//then the level will be ignored but the number is still required to be there
+	//
+	// ex:
+	// Wa 0 would be a wall
+	// Go 4 would be a lv 4 goblin
+	// Pl 0 represents the player (the player levels up on its own so no need for a level)
+	//
+	// error management:
+	//
+	// if the key does not exist the tile will be left blank 
+	// if the level provided for an entity is not valid the level will default to 1
+	//
+	// key index:
+	//
+	// if you need to ad keys simply add more if/else statements in the same format as the others
+	//
+	// Wa: wall
+	// Pl: player
+	// Or: orc
+	// Go: goblin
+	// Ra: rat
+	// 00: empty space (properly implemented)
+	// 
+	// notes:
+	//
+	// -keys are case sensitive
+	// -keys can be more than two letters but for sanity's sake I've kept them monospace
+	// -there is no handling for having too many keys, i have not tested this but it will most likely throw an Out of bounds exception
+	// -Currently all my links to boards are direct, i haven't gotten relative links to work
+	
+	
 	public static ActorWorld buildFromFile(String filePath) throws FileNotFoundException {
 		PlayerActor player = new PlayerActor();
 		ActorWorld world; // = new ActorWorld(new GridMap<Actor>(y, x));
