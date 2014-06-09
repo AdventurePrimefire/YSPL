@@ -44,7 +44,7 @@ public class Actor {
     
     /**
      * Gets the color of this actor.
-     * 
+     *
      * @return the color of this actor
      */
     public Color getColor() {
@@ -53,7 +53,7 @@ public class Actor {
     
     /**
      * Sets the color of this actor.
-     * 
+     *
      * @param newColor
      *            the new color
      */
@@ -63,7 +63,7 @@ public class Actor {
     
     /**
      * Gets the current direction of this actor.
-     * 
+     *
      * @return the direction of this actor, an angle between 0 and 359 degrees
      */
     public int getDirection() {
@@ -72,7 +72,7 @@ public class Actor {
     
     /**
      * Sets the current direction of this actor.
-     * 
+     *
      * @param newDirection
      *            the new direction. The direction of this actor is set to the
      *            angle between 0 and 359 degrees that is equivalent to
@@ -87,7 +87,7 @@ public class Actor {
     
     /**
      * Gets the grid in which this actor is located.
-     * 
+     *
      * @return the grid of this actor, or <code>null</code> if this actor is not
      *         contained in a grid
      */
@@ -97,7 +97,7 @@ public class Actor {
     
     /**
      * Gets the location of this actor.
-     * 
+     *
      * @return the location of this actor, or <code>null</code> if this actor is
      *         not contained in a grid
      */
@@ -110,7 +110,7 @@ public class Actor {
      * location, it is removed. <br />
      * Precondition: (1) This actor is not contained in a grid (2)
      * <code>loc</code> is valid in <code>gr</code>
-     * 
+     *
      * @param gr
      *            the grid into which this actor should be placed
      * @param loc
@@ -152,7 +152,7 @@ public class Actor {
      * given location, it is removed. <br />
      * Precondition: (1) This actor is contained in a grid (2)
      * <code>newLocation</code> is valid in the grid of this actor
-     * 
+     *
      * @param newLocation
      *            the new location
      */
@@ -189,7 +189,7 @@ public class Actor {
     
     /**
      * Creates a string that describes this actor.
-     * 
+     *
      * @return a string with the location, direction, and color of this actor
      */
     @Override

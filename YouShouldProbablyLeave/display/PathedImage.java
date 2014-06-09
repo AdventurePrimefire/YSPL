@@ -1,10 +1,7 @@
 package display;
 
-import java.io.File;
 
 /**
- * All implementations must have a black constructor.
+ * All implementations must have a File field called file.
  */
-public interface PathedImage {
-    public File getFile();
-}
+public interface PathedImage {}

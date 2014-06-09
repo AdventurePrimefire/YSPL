@@ -1,15 +1,21 @@
 package player;
 
+import info.gridworld.actor.Actor;
+import info.gridworld.grid.Location;
+
 import java.awt.event.KeyEvent;
 
 import ai.Ai;
 import stats.CompleatStats;
-import main.YSPL;
-import info.gridworld.actor.Actor;
-import info.gridworld.grid.Location;
+import java.io.File;
 
-public class PlayerActor extends Actor implements CompleatStats {
+import main.YSPL;
+import display.PathedImage;
+
+public class PlayerActor extends Actor implements CompleatStats, PathedImage {
 private boolean running = false;
+    public static final File file = new File("resource//image//actors//PlayerActor.gif");
+    
 
 private int level;
 
