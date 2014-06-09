@@ -32,22 +32,22 @@ public abstract class AbstractGrid<E> implements Grid<E> {
         }
         return neighbors;
     }
-    
+
     @Override
     public ArrayList<Location> getValidAdjacentLocations(Location loc) {
         ArrayList<Location> locs = new ArrayList<Location>();
-        
+
         int d = Location.NORTH;// change so it only gets the cardnal directions
-        for (int i = 0; i < Location.FULL_CIRCLE / Location.HALF_RIGHT; i++) {
+        for (int i = 0; i < Location.FULL_CIRCLE / Location.RIGHT; i++) {
             Location neighborLoc = loc.getAdjacentLocation(d);
             if (isValid(neighborLoc)) {
                 locs.add(neighborLoc);
             }
-            d = d + Location.HALF_RIGHT;
+            d = d + Location.RIGHT;
         }
         return locs;
     }
-    
+
     @Override
     public ArrayList<Location> getEmptyAdjacentLocations(Location loc) {
         ArrayList<Location> locs = new ArrayList<Location>();
@@ -58,7 +58,7 @@ public abstract class AbstractGrid<E> implements Grid<E> {
         }
         return locs;
     }
-    
+
     @Override
     public ArrayList<Location> getOccupiedAdjacentLocations(Location loc) {
         ArrayList<Location> locs = new ArrayList<Location>();
@@ -69,10 +69,10 @@ public abstract class AbstractGrid<E> implements Grid<E> {
         }
         return locs;
     }
-    
+
     /**
      * Creates a string that describes this grid.
-     * 
+     *
      * @return a string with descriptions of all objects in this grid (not
      *         necessarily in any particular order), in the format {loc=obj,
      *         loc=obj, ...}
