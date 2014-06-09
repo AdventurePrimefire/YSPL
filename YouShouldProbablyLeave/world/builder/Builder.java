@@ -10,7 +10,9 @@ import java.util.Scanner;
 
 import main.YSPL;
 import player.PlayerActor;
+import world.grid.AdvancedLocation;
 import world.grid.GridMap;
+import world.grid.MapLayer;
 import world.tile.floor.StoneWall;
 import entities.Goblin;
 import entities.Orc;
@@ -88,7 +90,7 @@ public class Builder {
                 world.add(new Location(posY, posX), player);
                 YSPL.player = player;
             } else if (next.equals("Wa")) {
-                world.add(new Location(posY, posX), new StoneWall());
+                world.add(new AdvancedLocation(new Location(posY, posX), MapLayer.FloorLevel), new StoneWall());
             } else if (next.equals("Go")) {
                 if (level >= 0) {
                     world.add(new Location(posY, posX), new Goblin(level, player));
@@ -152,7 +154,7 @@ public class Builder {
             if (next.equals("Pl")) {
                 world.add(new Location(posY, posX), player);
             } else if (next.equals("Wa")) {
-                world.add(new Location(posY, posX), new Wall());
+                world.add(new AdvancedLocation(new Location(posY, posX), MapLayer.FloorLevel), new StoneWall());
             } else if (next.equals("Go")) {
                 if (level >= 0) {
                     world.add(new Location(posY, posX), new Goblin(level, player));
