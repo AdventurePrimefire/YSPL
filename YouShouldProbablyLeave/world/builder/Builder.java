@@ -10,17 +10,18 @@ import java.util.Scanner;
 
 import main.YSPL;
 import player.PlayerActor;
+import util.GridUtil;
 import world.grid.AdvancedLocation;
 import world.grid.GridMap;
 import world.grid.MapLayer;
+import world.tile.floor.StoneFloor;
 import world.tile.floor.StoneWall;
 import entities.Goblin;
 import entities.Orc;
 import entities.Rat;
-import entities.Wall;
 
 public class Builder {
-    
+
     // the builder reads files in the following format:
     // (an int the height of the board) (an int the width of the world)
     //
@@ -66,26 +67,26 @@ public class Builder {
 // but it will most likely throw an Out of bounds exception
     // -Currently all my links to boards are direct, i haven't gotten relative
 // links to work
-    
+
     public static ActorWorld buildFromFile(String filePath) throws FileNotFoundException {
         PlayerActor player = new PlayerActor();
         ActorWorld world; // = new ActorWorld(new GridMap<Actor>(y, x));
-        
+
         // File loadFile = new File("board1.txt");
         File loadFile = new File(filePath);
         Scanner fileReader = new Scanner(loadFile);
-        
+
         int y = fileReader.nextInt();
         int x = fileReader.nextInt();
         GridMap<Actor> grid = new GridMap<Actor>(y, x);
         world = new ActorWorld(grid);
-        
+
         int posX = 0, posY = 0;
-        
+
         while (fileReader.hasNext()) {
             String next = fileReader.next();
             int level = fileReader.nextInt();
-            
+
             if (next.equals("Pl")) {
                 world.add(new Location(posY, posX), player);
                 YSPL.player = player;
@@ -117,7 +118,7 @@ public class Builder {
             } else {
                 System.err.println("Key: " + next + " is not valid. Leaving cell empty.");
             }
-            
+
             posY++;
             if (posY == y) {// OOB exception
                 posY = 0;
@@ -127,30 +128,30 @@ public class Builder {
                 }
             }
         }
-        
+
         fileReader.close();
-        
+
         return world;
     }
-    
+
     public static ActorWorld buildFromFile(String filePath, PlayerActor player) throws FileNotFoundException {
         ActorWorld world; // = new ActorWorld(new GridMap<Actor>(y, x));
-        
+
         // File loadFile = new File("board1.txt");
         File loadFile = new File(filePath);
         Scanner fileReader = new Scanner(loadFile);
-        
+
         int y = fileReader.nextInt();
         int x = fileReader.nextInt();
-        
+
         world = new ActorWorld(new GridMap<Actor>(y, x));
-        
+
         int posX = 0, posY = 0;
-        
+        GridUtil.fill((GridMap<Actor>) world.getGrid(), StoneFloor.class, MapLayer.FloorLevel);
         while (fileReader.hasNext()) {
             String next = fileReader.next();
             int level = fileReader.nextInt();
-            
+
             if (next.equals("Pl")) {
                 world.add(new Location(posY, posX), player);
             } else if (next.equals("Wa")) {
@@ -181,7 +182,7 @@ public class Builder {
             } else {
                 System.err.println("Key: " + next + " is not valid. Leaving cell empty.");
             }
-            
+
             posY++;
             if (posY == y) {// OOB exception
                 posY = 0;
@@ -191,10 +192,8 @@ public class Builder {
                 }
             }
         }
-        
+
         fileReader.close();
-        
         return world;
     }
-    
 }

@@ -34,7 +34,7 @@ public class BoundedGrid<E> extends AbstractGrid<E> {
     /**
      * Constructs an empty bounded grid with the given dimensions.
      * (Precondition: <code>rows > 0</code> and <code>cols > 0</code>.)
-     * 
+     *
      * @param rows
      *            number of rows in BoundedGrid
      * @param cols
@@ -124,7 +124,12 @@ public class BoundedGrid<E> extends AbstractGrid<E> {
     @Override
     public boolean isMoveable(Location loc) {
         if (isValid(loc)) {
-            return ((Actor) this.get(loc)).isBlocksMovment();
+            Actor act = (Actor) this.get(loc);
+            if (act != null) {
+                return !((Actor) this.get(loc)).isBlocksMovment();
+            } else {
+                return true;
+            }
         } else {
             return false;
         }

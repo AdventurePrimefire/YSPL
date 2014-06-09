@@ -7,20 +7,20 @@ import player.PlayerActor;
 import util.GridUtil;
 import world.grid.GridMap;
 import world.grid.MapLayer;
-import world.tile.floor.StoneWall;
+import world.tile.floor.StoneFloor;
 
 public class YSPLRunner {
-    
+
     public static void main(String[] args) {
         GridMap<Actor> grid = new GridMap<Actor>(10, 10);
         ActorWorld world = new ActorWorld(grid);
         YSPL.world = world;
         PlayerActor player = new PlayerActor();
         YSPL.player = player;
-        GridUtil.fill(grid, StoneWall.class, MapLayer.FloorLevel);
+        GridUtil.fill(grid, StoneFloor.class, MapLayer.FloorLevel);
         world.add(new Bug());
         world.add(player);
         world.show();
     }
-    
+
 }

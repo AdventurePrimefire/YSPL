@@ -12,13 +12,13 @@ import java.util.ArrayList;
 public class GridMap<Actor> extends BoundedGrid<Actor> {
     private BoundedGrid<Actor> objectGrid;
     private BoundedGrid<Actor> mapGrid;
-    
+
     public GridMap(int row, int cols) {
         super(row, cols);
         objectGrid = new BoundedGrid<Actor>(row, cols);
         mapGrid = new BoundedGrid<Actor>(row, cols);
     }
-    
+
     @SuppressWarnings("unchecked")
     @Override
     public Actor put(Location loc, Actor obj) {
@@ -56,7 +56,7 @@ public class GridMap<Actor> extends BoundedGrid<Actor> {
             }
         }
     }
-    
+
     @Override
     public boolean isValid(Location loc) {
         if (loc instanceof AdvancedLocation) {
@@ -74,7 +74,7 @@ public class GridMap<Actor> extends BoundedGrid<Actor> {
             return super.isValid(loc);
         }
     }
-    
+
     public ArrayList<AdvancedLocation> getOccupiedLocation(MapLayer layer) {
         switch (layer) {
             case ActorLevel:
@@ -87,7 +87,7 @@ public class GridMap<Actor> extends BoundedGrid<Actor> {
                 throw new IllegalArgumentException();
         }
     }
-    
+
     private ArrayList<AdvancedLocation> makeAdvanced(ArrayList<Location> list, MapLayer layer) {
         ArrayList<AdvancedLocation> out = new ArrayList<AdvancedLocation>();
         for (Location i : list) {
@@ -95,7 +95,7 @@ public class GridMap<Actor> extends BoundedGrid<Actor> {
         }
         return out;
     }
-    
+
     public Actor get(AdvancedLocation loc) {
         switch (loc.getLayer()) {
             case ActorLevel:
@@ -108,7 +108,7 @@ public class GridMap<Actor> extends BoundedGrid<Actor> {
                 throw new IllegalArgumentException();
         }
     }
-    
+
     public Actor remove(AdvancedLocation loc) {
         switch (loc.getLayer()) {
             case ActorLevel:
@@ -121,7 +121,7 @@ public class GridMap<Actor> extends BoundedGrid<Actor> {
                 throw new IllegalArgumentException();
         }
     }
-    
+
     public ArrayList<AdvancedLocation> getAllOccupiedLoactions() {
         ArrayList<AdvancedLocation> floor = new ArrayList<AdvancedLocation>();
         for (Location i : this.mapGrid.getOccupiedLocations()) {
@@ -156,7 +156,7 @@ public class GridMap<Actor> extends BoundedGrid<Actor> {
         }
         return all;
     }
-    
+
     public BoundedGrid<Actor> getLayer(MapLayer layer) {
         switch (layer) {
             case ActorLevel:
@@ -169,7 +169,7 @@ public class GridMap<Actor> extends BoundedGrid<Actor> {
                 return null;
         }
     }
-    
+
     @Override
     public boolean isMoveable(Location loc) {
         if (super.isValid(loc)) {
@@ -185,5 +185,14 @@ public class GridMap<Actor> extends BoundedGrid<Actor> {
         }
         return true;
 
+    }
+
+    @Override
+    public ArrayList<Actor> getNeighbors(Location loc) {
+        ArrayList<Actor> out = new ArrayList<Actor>();
+        out.addAll(super.getNeighbors(loc));
+        out.addAll(this.mapGrid.getNeighbors(loc));
+        out.addAll(this.objectGrid.getNeighbors(loc));
+        return out;
     }
 }

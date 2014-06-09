@@ -10,7 +10,7 @@ import world.grid.AdvancedLocation;
 
 public class DefaultPathfinding implements Pathfinding {
     public final int MaxPathLength;
-    
+
     /**
      * Default constructor for the Pathfinding. Uses
      * Pathfinding.DefaultPathfindingSteps for MaxPathLength.
@@ -18,7 +18,7 @@ public class DefaultPathfinding implements Pathfinding {
     public DefaultPathfinding() {
         MaxPathLength = Pathfinding.DefaultPathfindingSteps;
     }
-    
+
     /**
      * @param steps
      *            in the MaxPathLength.
@@ -26,7 +26,7 @@ public class DefaultPathfinding implements Pathfinding {
     public DefaultPathfinding(int steps) {
         MaxPathLength = steps;
     }
-    
+
     @Override
     public AdvancedLocation findPath(Location start, Location end, Grid<Actor> grid) {
         ArrayList<Space> queue = new ArrayList<Space>();// The list of locations
@@ -68,7 +68,7 @@ public class DefaultPathfinding implements Pathfinding {
             return best.loc;
         }
     }
-    
+
     protected void consolidate(ArrayList<Space> queue, ArrayList<Space> addingLocations) {
         for (Space i : addingLocations) {
             Space test = null;
@@ -91,7 +91,7 @@ public class DefaultPathfinding implements Pathfinding {
             }
         }
     }
-    
+
     protected ArrayList<Space> findNextSpace(Space current, Grid<Actor> grid) throws Exception {
         int counter = current.counter + 1;
         if (current.counter <= this.MaxPathLength) {
@@ -99,43 +99,51 @@ public class DefaultPathfinding implements Pathfinding {
             // Finding all possible locations to travel to.
             if (grid.isValid(current.loc.getAdjacentLocation(Location.NORTH))) {
                 AdvancedLocation aloc = new AdvancedLocation(current.loc.getAdjacentLocation(Location.NORTH));
-                if (grid.isMoveable(aloc)) {
-                    out.add(new Space(aloc, counter));
-                }
+                try {
+                    if (grid.isMoveable(aloc)) {
+                        out.add(new Space(aloc, counter));
+                    }
+                } catch (Exception e) {}
             }
             if (grid.isValid(current.loc.getAdjacentLocation(Location.EAST))) {
                 AdvancedLocation aloc = new AdvancedLocation(current.loc.getAdjacentLocation(Location.EAST));
-                if (grid.isMoveable(aloc)) {
-                    out.add(new Space(aloc, counter));
-                }
+                try {
+                    if (grid.isMoveable(aloc)) {
+                        out.add(new Space(aloc, counter));
+                    }
+                } catch (Exception e) {}
             }
             if (grid.isValid(current.loc.getAdjacentLocation(Location.SOUTH))) {
                 AdvancedLocation aloc = new AdvancedLocation(current.loc.getAdjacentLocation(Location.SOUTH));
-                if (grid.isMoveable(aloc)) {
-                    out.add(new Space(aloc, counter));
-                }
+                try {
+                    if (grid.isMoveable(aloc)) {
+                        out.add(new Space(aloc, counter));
+                    }
+                } catch (Exception e) {}
             }
             if (grid.isValid(current.loc.getAdjacentLocation(Location.WEST))) {
                 AdvancedLocation aloc = new AdvancedLocation(current.loc.getAdjacentLocation(Location.WEST));
-                if (grid.isMoveable(aloc)) {
-                    out.add(new Space(aloc, counter));
-                }
+                try {
+                    if (grid.isMoveable(aloc)) {
+                        out.add(new Space(aloc, counter));
+                    }
+                } catch (Exception e) {}
             }
             return out;
         } else {
             throw new Exception();
         }
     }
-    
+
     protected class Space {// Space object used in the path-finding
         public AdvancedLocation loc;
         public int counter;
-        
+
         public Space(AdvancedLocation loc, int counter) {
             this.loc = loc;
             this.counter = counter;
         }
-        
+
         @Override
         public String toString() {
             return "" + loc.toString() + "=" + this.counter;
