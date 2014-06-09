@@ -226,11 +226,11 @@ public abstract class Ai extends Actor implements CompleatStats {
     @Override
     public void takeDamage(int damage) {
         if (Math.random() > getAvoidPercent()) {
-        	if (damage <= defense) {
-        		System.out.println("Damage Taken: " + (damage - defense));
-        		this.curHP -= damage - defense;
+        	if (damage > defense) {
+        		System.out.println("Damage Taken: " + (damage - defense) + "\n");
+        		this.curHP -= (damage - defense);
         	} else {
-        		System.out.println("Damage Taken: 1");
+        		System.out.println("Damage Taken: 1 \n");
         		this.curHP--;
         	}
         }

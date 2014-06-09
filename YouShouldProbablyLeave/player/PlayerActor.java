@@ -42,8 +42,8 @@ public class PlayerActor extends Actor implements CompleatStats, PathedImage {
         this.maxHP = 100;
         this.curHP = 100;
 
-        this.strength = 20;
-        this.defense = 10;
+        this.strength = 9;
+        this.defense = 8;
         this.agility = 5;
 
         this.nextExp = 50;
